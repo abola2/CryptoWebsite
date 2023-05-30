@@ -48,7 +48,7 @@ To run this project locally, please follow these steps:
    ```
 
 5. Open your web browser and visit https://localhost:7245 to access the application. 
-   Alternatively you can visit Visit https://bitcoin.abola.fi
+   Alternatively you can visit https://bitcoin.abola.fi
 
 
 
