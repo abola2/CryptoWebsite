@@ -1,7 +1,7 @@
 # School Project: C# 7 Blazor - Bitcoin Analysis
 
-[![GitHub](https://img.shields.io/github/license/your-username/repo-name)](https://github.com/your-username/repo-name/blob/main/LICENSE)
-[![GitHub last commit](https://img.shields.io/github/last-commit/your-username/repo-name)](https://github.com/your-username/repo-name/commits/main)
+[![GitHub](https://img.shields.io/github/license/abola2/CryptoWebsite)]([[[https://github.com/abola2/CryptoWebsite/blob/main/LICENSE](https://github.com/abola2/CryptoWebsite/blob/main/LICENSE)](https://github.com/abola2/CryptoWebsite/blob/main/LICENSE)](https://github.com/abola2/CryptoWebsite/blob/main/LICENSE))
+[![GitHub last commit](https://img.shields.io/github/last-commit/abola2/CryptoWebsite)](https://github.com/abola2/CryptoWebsite/commits/main)
 
 This is a school project implemented in C# 7 using the Blazor framework. The project focuses on analyzing Bitcoin trading data to identify the best day to buy and sell for maximum profit.
 
@@ -57,4 +57,4 @@ To run this project locally, please follow these steps:
 
 ### License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See the [LICENSE](https://github.com/your-username/repo-name/blob/main/LICENSE) file for more details.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See the [LICENSE](https://github.com/CryptoWebsite/blob/main/LICENSE) file for more details.
