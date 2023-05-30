@@ -1,0 +1,10 @@
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\cropto.exe
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\appsettings.Development.json
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\appsettings.json
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\cropto.dll
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\cropto.deps.json
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\cropto.runtimeconfig.json
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\cropto.pdb
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\Newtonsoft.Json.dll
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\Radzen.Blazor.dll
+C:\Users\gr265706\ohjelmointi\Api\rajapinnat-abola2\T3\CryptoWebsite\cropto\cropto\obj\Release\net7.0\PubTmp\Out\System.Linq.Dynamic.Core.dll

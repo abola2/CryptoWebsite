@@ -1,0 +1,176 @@
+﻿@page "/"
+@inject cropto.Backend.GetDecreasing decressing
+@inject cropto.Backend.GetHighestTradingVolume trading
+@inject cropto.Backend.GetHighestTradingVolume highest
+@inject cropto.Backend.GetLowestTradingVolume timemachine
+
+
+
+<div class="scrolling-container">
+    <div class="content">
+<div class="col-md-12 col-lg-12 p-1 align-content-center">
+    <RadzenCard Style="background-color: #faf8f8;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 mb-1">
+                    <div class="rz-p-12 rz-text-align-center">
+                        <RadzenText TextStyle="TextStyle.H6">Start Date</RadzenText>
+                        <RadzenDatePicker ShowTime="false" DateFormat="dd:MM:yyyy" @bind-Value=@startDate Min=@calendarStartTimeStart Max=@calendarStartTimeEnd />
+                    </div>
+                </div>
+                <div class="col-xl-3 mb-12">
+                    <div class="rz-p-12 rz-text-align-center">
+                        <RadzenText TextStyle="TextStyle.H6">End Date</RadzenText>
+                        <RadzenDatePicker ShowTime="false" DateFormat="dd:MM:yyyy" @bind-Value=@endDate Min=@startDate  Max=@calendarEndTimeEnd />
+                    </div>
+                </div>
+                <div class="col-xl-3 mb-12 d-flex justify-content-center align-items-center" style="margin-top: 20px;">
+                    <div class="rz-p-12 rz-text-align-center">
+                        <RadzenButton Click=@(args => OnSearch()) Text="Search" Icon="explore" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Large" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 p-3 rz-text-align-center ">
+            <RadzenCard Style="background-color: #f2f2f2;">
+                <RadzenGrid TItem="Bitcoin" Data="@Coins" PageSize="8">
+                    <Columns>
+                        <RadzenGridColumn TItem="Bitcoin" Property="DecreasingString" Title="Longest bearish" />
+                        <RadzenGridColumn TItem="Bitcoin" Property="TradingString" Title="Highest trading volume" />
+                        <RadzenGridColumn TItem="Bitcoin" Property="TimeMachineString" Title="TimeMachine" />
+                    </Columns>
+                </RadzenGrid>
+            </RadzenCard>
+        </div>
+    </RadzenCard>
+</div>
+</div>
+</div>
+
+
+
+
+@code {
+    public class Bitcoin
+    {
+        public string DecreasingString { get; set; }
+        public string TradingString { get; set; }
+        public string TimeMachineString { get; set; }
+    }
+
+
+    private static string finalDecreasing = "Search something";
+
+    private static string finalTrading = "Search something?";
+
+    private static string finalTimeMachine = "Maeby seach something?";
+
+
+    List<Bitcoin> Coins = new List<Bitcoin>()
+    {
+        new Bitcoin() { DecreasingString = finalDecreasing, TradingString = finalTrading, TimeMachineString = finalTimeMachine },
+    };
+
+
+    //Current date
+    private DateTime endDate = DateTime.UtcNow;
+    //Current date -1 year
+    private DateTime startDate = DateTime.UtcNow.AddYears(-1);
+
+    private DateTime calendarStartTimeStart = DateTime.Today.AddYears(-13);
+    private DateTime calendarStartTimeEnd = DateTime.Today.AddDays(-1);
+    private DateTime calendarEndTimeEnd = DateTime.Today;
+
+    private async Task OnSearch()
+    {
+        finalDecreasing = await Decreasings();
+        finalTimeMachine = await TimeMachine();
+        finalTrading = await Trading();
+
+        foreach (var coin in Coins)
+        {
+            coin.DecreasingString = finalDecreasing;
+            coin.TradingString = finalTrading;
+            coin.TimeMachineString = finalTimeMachine;
+        }
+        
+    }
+
+    
+
+    private async Task<string> Decreasings()
+    {
+        string output = "Problems... Please open github issue!";
+        double value = 0;
+        try{
+        long starttime = ((DateTimeOffset)startDate).ToUnixTimeMilliseconds();
+        long endtime = ((DateTimeOffset)endDate).ToUnixTimeMilliseconds();
+        value = await Task.Run(() => decressing.BitcoinvaluesSearch(starttime, endtime));
+        output = value.ToString();
+        }
+        catch (Exception ex)
+        {
+            // Handle and log the exception appropriately
+            Console.WriteLine($"An error occurred: {ex.Message}");        
+        }
+        return output;    
+
+    }
+
+
+    private async Task<string> TimeMachine()
+    {
+        string output = "Problems... Please open github issue!";
+        try
+        {
+            long starttime = ((DateTimeOffset)startDate).ToUnixTimeMilliseconds();
+            long endtime = ((DateTimeOffset)endDate).ToUnixTimeMilliseconds();
+
+            var highestTradingVolume = await Task.Run(() => timemachine.GetBestDaySellAndBuy(starttime, endtime));
+            //minPrice, minDate, maxPrice, maxDate
+            double profitTimeMachine = highestTradingVolume.Item3-highestTradingVolume.Item1;
+
+            output = "Buy: " + ParseUnixToDate((long)highestTradingVolume.Item2).ToString("MM/dd/yyyy")+ " sell: "+ParseUnixToDate((long)highestTradingVolume.Item4).ToString("MM/dd/yyyy")+ " profit: "+ profitTimeMachine.ToString("0.00")+"€";
+        }
+        catch (Exception ex)
+        {
+            // Handle and log the exception appropriately
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+        return output;
+    }
+
+   
+
+
+
+    private async Task<string> Trading()
+    {
+        string output = "Problems... Please open github issue!";
+        double highestTradingVolume = 0;
+        try
+        {
+            long starttime = ((DateTimeOffset)startDate).ToUnixTimeMilliseconds();
+            long endtime = ((DateTimeOffset)endDate).ToUnixTimeMilliseconds();
+
+            highestTradingVolume = await Task.Run(() => trading.GetHighestTradingVolumesInRange(starttime, endtime));
+            
+            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds((long)highestTradingVolume);
+            DateTime dateTime = dateTimeOffset.DateTime;
+            output = dateTime.ToString("MM/dd/yyyy");
+        }
+        catch (Exception ex)
+        {
+            // Handle and log the exception appropriately
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+        return output;
+    }
+
+    private DateTime ParseUnixToDate(long unixTime) {
+            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(unixTime);
+            return dateTimeOffset.DateTime;
+        }
+
+}
+

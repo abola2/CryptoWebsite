@@ -1,0 +1,27 @@
+﻿@inject NavigationManager Navigation
+@inject TooltipService tooltipService
+
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <div class="rz-p-12 rz-text-align-center">
+            <RadzenText Text="Main page" @onclick="HandleClick"/>
+        </div>
+    </NotFound>
+</Router>
+
+
+
+
+@code {
+
+    private void HandleClick()
+    {
+        Navigation.NavigateTo("/");
+    }
+
+}
