@@ -1,4 +1,4 @@
-# School Project: C# 7 Blazor - Bitcoin Analysis
+# C# 7 Blazor - Bitcoin Analysis
 
 
 This is a school project implemented in C# 7 using the Blazor framework. The project focuses on analyzing Bitcoin trading data to identify the best day to buy and sell for maximum profit.
